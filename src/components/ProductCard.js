@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Card, Header, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../contexts/CartContext'
+import { capitalize } from '../api/helpers'
 export default function ProductCard({ product }) {
   const { addProductToCart } = useContext(CartContext)
 
@@ -16,7 +17,7 @@ export default function ProductCard({ product }) {
         <img src={product.imageURL} style={{ height: '200px', margin: 10, maxWidth: '90%' }} />
       </Card.Content>
       <Card.Content>
-        <Header textAlign='center' size='small'>{product.title.toUpperCase()}</Header>
+        <Header textAlign='center' size='small'>{capitalize(product.title)}</Header>
         <Card.Meta>
           <span className='date'>{product.category}</span>
         </Card.Meta>
