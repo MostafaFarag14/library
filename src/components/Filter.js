@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Accordion, Form, Menu } from 'semantic-ui-react'
 import qs from 'qs'
 import PriceMenu from './PriceMenu'
-import { capitalize } from '../api/helpers'
+import { capitalize, convertSnakeCaseToHuman } from '../api/helpers'
 
 
 const Filter = ({ setQuery }) => {
@@ -67,7 +67,7 @@ const Filter = ({ setQuery }) => {
               <Menu.Item key={key}>
                 <Accordion.Title
                   active={activeIndexes.includes(key)}
-                  content={capitalize(key)}
+                  content={convertSnakeCaseToHuman(key)}
                   index={key}
                   onClick={handleClick}
                 />
