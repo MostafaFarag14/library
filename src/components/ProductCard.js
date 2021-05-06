@@ -12,14 +12,14 @@ export default function ProductCard({ product }) {
   }
   
   return (
-    <Card as={Link} to={`/product/${product.id}`} raised centered style={{ textAlign: 'left' }}>
+    <Card as={Link} to={`/product/${product.id}`} raised centered style={{ textAlign: 'left', height: '100%' }}>
       <Card.Content textAlign='center'>
-        <img src={product.imageURL} style={{ height: '200px', margin: 10, maxWidth: '90%' }} />
+        <img alt={product.title} src={product.imageURL} style={{ height: '200px', margin: 10, maxWidth: '90%' }} />
       </Card.Content>
       <Card.Content>
         <Header textAlign='center' size='small'>{capitalize(product.title)}</Header>
         <Card.Meta>
-          <span className='date'>{product.category}</span>
+          <span className='date'>{capitalize(product.category)}</span>
         </Card.Meta>
         <Card.Description style={{ display: 'flex',justifyContent: 'space-between' }}>
           <Header style={{margin:0}} size='small' >{product.brand}</Header>
