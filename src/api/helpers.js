@@ -48,14 +48,14 @@ export const getOrder = async orderCode => {
 
 export const capitalize = (str) => {
 
-  if (str === null)
+  if (!str)
     return ''
 
   return str[0].toUpperCase() + str.slice(1)
 }
 
 export const removeSpaces = str => {
-  if (str === null)
+  if (!str)
     return ''
 
   return str.split(' ').join('')

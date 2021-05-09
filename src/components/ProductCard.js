@@ -12,9 +12,9 @@ export default function ProductCard({ product }) {
   }
   
   return (
-    <Card as={Link} to={`/product/${product.id}`} raised centered style={{ textAlign: 'left', height: '100%' }}>
+    <Card draggable={false} as={Link} to={`/product/${product.id}`} raised centered style={{ textAlign: 'left', height: '100%' }}>
       <Card.Content textAlign='center'>
-        <img alt={product.title} src={product.imageURL} style={{ height: '200px', margin: 10, maxWidth: '90%' }} />
+        <img draggable={false} alt={product.title} src={product.imageURL} style={{ height: '200px', margin: 10, maxWidth: '90%' }} />
       </Card.Content>
       <Card.Content>
         <Header textAlign='center' size='small'>{capitalize(product.title)}</Header>

@@ -37,7 +37,7 @@ export default function Item() {
       <Grid.Column stretched computer='8' mobile='16' >
         <Card fluid style={{ boxShadow: 'none' }}>
           <Card.Content>
-            <Header>{capitalize(product.title)}</Header>
+            <Header>(product.title)</Header>
             <Header color='blue'>{product.price} EGP</Header>
           </Card.Content>
           <Card.Content>

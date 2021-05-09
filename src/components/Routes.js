@@ -10,13 +10,14 @@ import Cart from '../pages/Cart';
 import CheckOut from '../pages/CheckOut';
 import Order from '../pages/Order';
 import LoadingSegment from './LoadingSegment';
+import Home from '../pages/Home';
 
 
 export default function Routes({ query, setQuery, loading }) {
   return (
-    <Container style={{ display: 'flex' }}>
+    <Container>
       <Switch>
-        <Route exact path={['/', '/products']} render={() => (
+        <Route exact path='/products' render={() => (
           <>
             <Filter query={query} setQuery={setQuery} />
             <div style={{ margin: 10, flex: 1, textAlign: 'right' }}>
@@ -30,6 +31,7 @@ export default function Routes({ query, setQuery, loading }) {
         <Route path='/cart' component={Cart} />
         <Route path='/checkout' component={CheckOut} />
         <Route path='/orders/:code' component={Order} />
+        <Route exact path='/' component={Home} />
       </Switch>
     </Container>
   )

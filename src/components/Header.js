@@ -8,7 +8,7 @@ import { CartContext } from '../contexts/CartContext'
 
 const Header = ({ setQuery }) => {
   const brands = ['adel', 'prima', 'panda']
-  const categories = ['phones', 'tablets']
+  const categories = ['school products', 'office tools']
   const [search, setSearch] = useState('')
   const [rawResults, setRawResults] = useState()
   const [results, setResults] = useState()
@@ -29,9 +29,6 @@ const Header = ({ setQuery }) => {
         setResults(formattedResult)
       })
   }
-  const handleItemSelect = () => {
-
-  }
 
   const openProductPage = (e, data) => {
     const { id } = rawResults.find(result => result.title === data.result.title)
@@ -43,19 +40,19 @@ const Header = ({ setQuery }) => {
       <Menu style={{ padding: 10, boxShadow: '0 2px 5px 0 rgba(0,0,0,.08)' }} compact borderless size='large' attached='top'>
         <Container>
           <Menu.Item as={Link} to='/' onClick={() => setQuery('')} name='Home' />
-          <Menu.Item name='Promotions' onClick={handleItemSelect} />
-          <Dropdown item text='Brands' simple>
+          <Menu.Item as={Link} to='/products' name='Promotions' />
+          <Dropdown item text='Brands' simple as={Link} to='/products'>
             <Dropdown.Menu >
               {brands.map((brand, index) => (
-                <Dropdown.Item key={index} value={brand} onClick={(e, { value }) => setQuery(`brand=${value}`)}>{capitalize(brand)}</Dropdown.Item>
+                <Dropdown.Item as={Link} to='/products' key={index} value={brand} onClick={(e, { value }) => setQuery(`brand=${value}`)}>{capitalize(brand)}</Dropdown.Item>
               ))}
             </Dropdown.Menu>
           </Dropdown>
 
-          <Dropdown item simple text='Categories'>
+          <Dropdown item simple text='Categories' as={Link} to='/products'>
             <Dropdown.Menu>
               {categories.map((category, index) => (
-                <Dropdown.Item key={index} text={capitalize(category)} value={category} onClick={(e, { value }) => setQuery(`category=${value}`)} />
+                <Dropdown.Item as={Link} to='/products' key={index} text={capitalize(category)} value={category} onClick={(e, { value }) => setQuery(`category=${value}`)} />
               ))}
             </Dropdown.Menu>
           </Dropdown>

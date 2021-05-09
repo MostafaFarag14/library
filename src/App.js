@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css';
 import Header from './components/Header'
-
+import Footer from "./components/Footer";
 import { CartProvider } from './contexts/CartContext'
 
 import { awakeAPI } from "./api/helpers";
@@ -26,6 +26,7 @@ function App() {
       <div className='App'>
         <Header setQuery={setQuery} />
         <Routes query={query} setQuery={setQuery} loading={loading} />
+        <Footer />
       </div>
     </CartProvider>
   );
