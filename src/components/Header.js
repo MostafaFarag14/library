@@ -36,49 +36,46 @@ const Header = ({ setQuery }) => {
   }
   const { cart } = useContext(CartContext)
   return (
-    <div>
-      <Menu style={{ padding: 10, boxShadow: '0 2px 5px 0 rgba(0,0,0,.08)' }} compact borderless size='large' attached='top'>
-        <Container>
-          <Menu.Item as={Link} to='/' onClick={() => setQuery('')} name='Home' />
-          <Menu.Item as={Link} to='/products' name='Promotions' />
-          <Dropdown item text='Brands' simple as={Link} to='/products'>
-            <Dropdown.Menu >
-              {brands.map((brand, index) => (
-                <Dropdown.Item as={Link} to='/products' key={index} value={brand} onClick={(e, { value }) => setQuery(`brand=${value}`)}>{capitalize(brand)}</Dropdown.Item>
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
+    
+    <Menu stackable style={{ boxShadow: '0 2px 5px 0 rgba(0,0,0,.08)' }} compact borderless size='large' attached='top'>
+      <Container>
 
-          <Dropdown item simple text='Categories' as={Link} to='/products'>
-            <Dropdown.Menu>
-              {categories.map((category, index) => (
-                <Dropdown.Item as={Link} to='/products' key={index} text={capitalize(category)} value={category} onClick={(e, { value }) => setQuery(`category=${value}`)} />
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
+      <Menu.Item style={{justifyContent: 'center'}} as={Link} to='/' onClick={() => setQuery('')} name='Home' />
+      <Menu.Item style={{justifyContent: 'center'}} as={Link} to='/products' name='Promotions' />
+      <Dropdown style={{justifyContent: 'center'}} item text='Brands' simple >
+        <Dropdown.Menu >
+          {brands.map((brand, index) => (
+            <Dropdown.Item as={Link} to='/products' key={index} value={brand} onClick={(e, { value }) => setQuery(`brand=${value}`)}>{capitalize(brand)}</Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
+
+      <Dropdown style={{justifyContent: 'center'}} item simple text='Categories'>
+        <Dropdown.Menu>
+          {categories.map((category, index) => (
+            <Dropdown.Item as={Link} to='/products' key={index} text={capitalize(category)} value={category} onClick={(e, { value }) => setQuery(`category=${value}`)} />
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
 
 
-          <Menu.Menu position='right' >
-            <Menu.Item fitted>
-              <Search
-                size='small'
-                onSearchChange={handelSearchInputChange}
-                value={search}
-                results={results}
-                onResultSelect={openProductPage}
+      <Menu.Item position='right' style={{ justifyContent: 'center'}}>
+        <Search
+          fluid
+          size='small'
+          onSearchChange={handelSearchInputChange}
+          value={search}
+          results={results}
+          onResultSelect={openProductPage}
+        />
 
-              />
-            </Menu.Item>
-            <Menu.Item>
-              <Button circular as={Link} compact basic to='/cart'>
-                <Icon fitted name='shopping cart' />
-                {cart.count !== 0 && <Label floating circular color='red' content={cart.count} />}
-              </Button>
-            </Menu.Item>
-          </Menu.Menu>
-        </Container>
-      </Menu>
-    </div >
+        <Button circular as={Link} compact basic to='/cart'>
+          <Icon fitted name='shopping cart' />
+          {cart.count !== 0 && <Label floating circular color='red' content={cart.count} />}
+        </Button>
+      </Menu.Item>
+      </Container>
+    </Menu>
   )
 
 }

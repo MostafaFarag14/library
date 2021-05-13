@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
-import { Container } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 
 import Filter from './Filter'
 import Main from './Main'
@@ -18,13 +18,17 @@ export default function Routes({ query, setQuery, loading }) {
     <Container>
       <Switch>
         <Route exact path='/products' render={() => (
-          <>
-            <Filter query={query} setQuery={setQuery} />
-            <div style={{ margin: 10, flex: 1, textAlign: 'right' }}>
+          <Grid padded='vertically'>
+            <Grid.Column computer={4} mobile={16}>
+              <Filter query={query} setQuery={setQuery} />
+            </Grid.Column>
+            {/* <div style={{ margin: 10, flex: 1, textAlign: 'right' }}> */}
+            <Grid.Column textAlign='right' computer={12} mobile={16}>
               <SortMenu query={query} setQuery={setQuery} />
               {loading === true ? <LoadingSegment /> : <Main query={query} />}
-            </div>
-          </>
+            </Grid.Column>
+            {/* </div> */}
+          </Grid>
         )
         } />
         <Route path='/product/:id' component={Item} />

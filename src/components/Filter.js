@@ -58,9 +58,7 @@ const Filter = ({ setQuery }) => {
       setFilter({ ...filter, [key]: [...filter[key], data.value] })
   }
   return (
-    <div style={{ width: '20%', marginTop: 20 }}>
-
-      <Accordion as={Menu} vertical>
+      <Accordion as={Menu} vertical fluid>
         {
           Object.keys(menu).map(key => {
             return (
@@ -98,7 +96,6 @@ const Filter = ({ setQuery }) => {
           })
         }
       </Accordion>
-    </div>
   )
 
 }

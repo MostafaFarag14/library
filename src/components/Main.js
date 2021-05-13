@@ -19,7 +19,7 @@ export default function Main({ query }) {
 
   return (
 
-    <Grid >
+    <Grid>
       <Grid.Row >
         {products.map(product => (
           <Grid.Column key={product.id} style={{ marginTop: 20, padding: 8 }} computer='5' tablet='8' mobile='16' >
