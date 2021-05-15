@@ -6,7 +6,7 @@ import CartDetail from '../components/CartDetail'
 export default function Cart() {
   return (
     <div style={{ flex: 1, marginTop: 20 }}>
-      <CartDetail />
+      <CartDetail editable/>
       <div>
         <Button size='large' color='vk' as={Link} content='Check Out' to='/checkout' />
       </div>

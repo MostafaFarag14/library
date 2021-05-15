@@ -51,7 +51,7 @@ export default function CheckOut() {
   return (
     <div style={{margin: '20px 0px' }}>
       <CompletionSteps activeStep={activeStep} />
-      <CartDetail />
+      <CartDetail/>
       {
         activeStep === 0 ?
           <>

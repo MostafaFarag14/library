@@ -3,10 +3,12 @@ import { Accordion, Form, Menu } from 'semantic-ui-react'
 import qs from 'qs'
 import PriceMenu from './PriceMenu'
 import { capitalize, convertSnakeCaseToHuman } from '../api/helpers'
+import { useHistory, useLocation } from 'react-router'
 
 
 const Filter = ({ setQuery }) => {
-
+  let location = useLocation()
+  let history = useHistory()
   const [filter, setFilter] = useState({
     brand: [],
     category: [],
@@ -29,6 +31,16 @@ const Filter = ({ setQuery }) => {
       })
     });
     console.log(query)
+    let queryString = ''
+    Object.keys(filter).forEach((key, index) => {
+      if (filter[key].length !== 0) {
+        queryString += `${key}=${filter[key].reduce((all, seclection) => `${all},${seclection}`)}`
+        queryString += '&'
+      }
+    })
+    queryString = queryString.slice(0, queryString.length - 1)
+    history.push(`${location.pathname}?${queryString}`)
+    console.log(queryString)
     setQuery(query)
 
   }, [filter])
@@ -58,44 +70,44 @@ const Filter = ({ setQuery }) => {
       setFilter({ ...filter, [key]: [...filter[key], data.value] })
   }
   return (
-      <Accordion as={Menu} vertical fluid>
-        {
-          Object.keys(menu).map(key => {
-            return (
-              <Menu.Item key={key}>
-                <Accordion.Title
-                  active={activeIndexes.includes(key)}
-                  content={convertSnakeCaseToHuman(key)}
-                  index={key}
-                  onClick={handleClick}
-                />
-                {
-                  key === 'price' ?
-                    <Accordion.Content active={activeIndexes.includes(key)}>
-                      <PriceMenu filter={filter} setFilter={setFilter} />
-                    </Accordion.Content>
-                    :
-                    <Accordion.Content active={activeIndexes.includes(key)}>
-                      <Form>
-                        <Form.Group grouped >
-                          {menu[key].map((value, index) => {
-                            return (<Form.Checkbox
-                              key={index} label={capitalize(value)}
-                              name={value}
-                              checked={filter[key].includes(value) ? true : false}
-                              value={value}
-                              onClick={(e, data) => handleMenuClick(e, data, key)}
-                            />)
-                          })}
-                        </Form.Group>
-                      </Form>
-                    </Accordion.Content>
-                }
-              </Menu.Item>
-            )
-          })
-        }
-      </Accordion>
+    <Accordion as={Menu} vertical fluid>
+      {
+        Object.keys(menu).map(key => {
+          return (
+            <Menu.Item key={key}>
+              <Accordion.Title
+                active={activeIndexes.includes(key)}
+                content={convertSnakeCaseToHuman(key)}
+                index={key}
+                onClick={handleClick}
+              />
+              {
+                key === 'price' ?
+                  <Accordion.Content active={activeIndexes.includes(key)}>
+                    <PriceMenu filter={filter} setFilter={setFilter} />
+                  </Accordion.Content>
+                  :
+                  <Accordion.Content active={activeIndexes.includes(key)}>
+                    <Form>
+                      <Form.Group grouped >
+                        {menu[key].map((value, index) => {
+                          return (<Form.Checkbox
+                            key={index} label={capitalize(value)}
+                            name={value}
+                            checked={filter[key].includes(value) ? true : false}
+                            value={value}
+                            onClick={(e, data) => handleMenuClick(e, data, key)}
+                          />)
+                        })}
+                      </Form.Group>
+                    </Form>
+                  </Accordion.Content>
+              }
+            </Menu.Item>
+          )
+        })
+      }
+    </Accordion>
   )
 
 }
