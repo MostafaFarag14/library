@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { CartContext } from '../contexts/CartContext'
 import { Table, Button } from 'semantic-ui-react'
-export default function CartDetail() {
+export default function CartDetail({ editable }) {
   const { cart, removeFromCart } = useContext(CartContext)
 
   return (
@@ -14,8 +14,7 @@ export default function CartDetail() {
           <Table.HeaderCell>Price</Table.HeaderCell>
           <Table.HeaderCell>Quantity</Table.HeaderCell>
           <Table.HeaderCell>Total</Table.HeaderCell>
-          <Table.HeaderCell>Remove</Table.HeaderCell>
-
+          {editable && <Table.HeaderCell>Remove</Table.HeaderCell>}
         </Table.Row>
       </Table.Header>
 
@@ -35,7 +34,7 @@ export default function CartDetail() {
                 <Table.Cell>{product.price}</Table.Cell>
                 <Table.Cell>{product.quantity}</Table.Cell>
                 <Table.Cell>{product.price * product.quantity}</Table.Cell>
-                <Table.Cell><Button onClick={() => removeFromCart(product)} compact icon='remove' /></Table.Cell>
+                {editable && <Table.Cell><Button onClick={() => removeFromCart(product)} compact icon='remove' /></Table.Cell>}
               </Table.Row>
             ))}
       </Table.Body>
@@ -44,7 +43,8 @@ export default function CartDetail() {
         <Table.Row>
           <Table.HeaderCell>Total Amount:</Table.HeaderCell>
           <Table.HeaderCell>{cart.total} EGP</Table.HeaderCell>
-          {[1, 2, 3, 4].map((item, index) => <Table.HeaderCell key={index} />)}
+          {[1, 2, 3].map((item, index) => <Table.HeaderCell key={index} />)}
+          {editable && <Table.HeaderCell />}
         </Table.Row>
       </Table.Footer>
     </Table>

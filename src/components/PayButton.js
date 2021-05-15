@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom'
 import { Container, Radio, Segment } from 'semantic-ui-react';
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
-export default function PayButton({ total = 10, setActiveStep }) {
-  const [payOnline, setPayOnline] = useState(true)
+export default function PayButton({ total, setActiveStep, payOnline, setPayOnline }) {
   const onCreateOrder = (data, actions) => {
     return actions.order.create({
       purchase_units: [
